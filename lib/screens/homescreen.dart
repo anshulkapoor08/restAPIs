@@ -20,9 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
       for (Map i in data) {
         posts.add(PostsModel.fromJson(Map<String, dynamic>.from(i)));
       }
-       return posts;
-    } else 
-    {
+      return posts;
+    } else {
       return posts;
     }
   }
@@ -49,7 +48,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ListView.builder(
                     itemCount: posts.length,
                     itemBuilder: (context, index) {
-                      return Text(posts[index].title.toString());
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(posts[index].title.toString()),
+                              Text(posts[index].body.toString()),
+                            ],
+                          ),
+                        ),
+                      );
                     });
               }
             },
