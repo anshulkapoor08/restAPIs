@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:restapis/Models/model_p.dart';
+import 'package:restapis/Models/firstmodel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,8 +15,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<List<PostsModel>> getPostApi() async {
     final response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-    var data = jsonDecode(response.body.toString());
+    var data =
+        jsonDecode(response.body.toString()); //data ke andr poori array aa gyi
+
     if (response.statusCode == 200) {
+      posts.clear();
       for (Map i in data) {
         posts.add(PostsModel.fromJson(Map<String, dynamic>.from(i)));
       }
@@ -55,8 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(posts[index].title.toString()),
-                              Text(posts[index].body.toString()),
+                              Text('title\n' + posts[index].title.toString()),
+                              Text(
+                                  'description' + posts[index].body.toString()),
                             ],
                           ),
                         ),
