@@ -21,7 +21,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
 
     if (response.statusCode == 200) {
       for (Map i in data) {
-        UserModel user = UserModel(name: i['name'], email: i['email']);
         userList.add(UserModel.fromJson(Map<String, dynamic>.from(i)));
       }
       return userList;
@@ -45,7 +44,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
           future: getUser(),
           builder: (context, AsyncSnapshot<List<UserModel>> snapshot) {
             if (!snapshot.hasData) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else {
               return ListView.builder(
                   itemCount: userList.length,
@@ -89,6 +88,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class ReusableRow extends StatelessWidget {
   String title, value;
   ReusableRow({super.key, required this.title, required this.value});
